@@ -77,3 +77,54 @@ available converter list:
 
 Above two paths redirects differently.
 
+#### URL building
+
+```python
+from flask import Flask, url_for
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return 'index'
+
+@app.route('/login')
+def login():
+    return 'login'
+
+@app.route('/user/<username>')
+def profile(username):
+    return '{}\'s profile'.format(username)
+
+with app.test_request_context():
+    print(url_for('index'))
+    print(url_for('login'))
+    print(url_for('login', next='/'))
+    print(url_for('profile', username='John Doe'))
+
+/
+/login
+/login?next=/
+/user/John%20Doe
+```
+
+*url_for(function name, param1=value, ...)*
+
+if param is a part of url: pass it as path for the corresponding part
+
+if param is not a part of url: pass it as query string parameter at the end of url
+
+#### Methods
+
+Operates based on RFC 2068.
+
+*RFC2068: RFC doc which standardized HTTP 1.1 spec
+
+#### PASS: static files
+Don't get this part
+
+#### partial pass: render_template
+Don't get the 'package' part
+
+Restart from this part
+
